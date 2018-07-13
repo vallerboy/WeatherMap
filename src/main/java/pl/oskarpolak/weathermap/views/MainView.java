@@ -10,5 +10,9 @@ public class MainView {
         System.out.print("Podaj miasto: ");
     }
 
+    public void showWeather(String weatherText){
+        System.out.println(weatherText);
+    }
+
 
 }

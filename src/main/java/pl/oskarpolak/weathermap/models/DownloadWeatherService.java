@@ -15,7 +15,11 @@ public class DownloadWeatherService {
         return INSTANCE;
     }
 
-    public String readWebsite(String url){
+    public String getWeather(String cityName){
+        return null; //todo uzyc readWebsite i odczytac JSON, zwracjac pogode
+    }
+
+    private String readWebsite(String url){
         StringBuilder stringBuilder = new StringBuilder();
         try {
             HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(url).openConnection();

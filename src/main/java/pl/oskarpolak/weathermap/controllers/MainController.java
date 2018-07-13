@@ -25,6 +25,7 @@ public class MainController {
             mainView.showCityRequestText();
             userAnswer = scanner.nextLine();
 
+            mainView.showWeather(downloadWeatherService.getWeather(userAnswer));
         }while (!userAnswer.equals("exit"));
     }
 }
