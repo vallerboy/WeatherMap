@@ -6,6 +6,9 @@ public class MainView {
         System.out.println("Jesteśmy tu, aby Ci pomóc.. <3");
     }
 
+    public void showCityRequestText(){
+        System.out.print("Podaj miasto: ");
+    }
 
 
 }

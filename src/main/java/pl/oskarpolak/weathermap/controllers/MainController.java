@@ -1,11 +1,13 @@
 package pl.oskarpolak.weathermap.controllers;
 
+import pl.oskarpolak.weathermap.models.DownloadWeatherService;
 import pl.oskarpolak.weathermap.views.MainView;
 import java.util.Scanner;
 
 public class MainController {
     private MainView mainView;
     private Scanner scanner;
+    private DownloadWeatherService downloadWeatherService = DownloadWeatherService.getInstance();
 
     public MainController(){
         mainView = new MainView();
@@ -14,6 +16,15 @@ public class MainController {
 
     public void start() {
         mainView.showWelcomeText();
+        createMainLoop();
+    }
 
+    public void createMainLoop() {
+        String userAnswer;
+        do{
+            mainView.showCityRequestText();
+            userAnswer = scanner.nextLine();
+
+        }while (!userAnswer.equals("exit"));
     }
 }
