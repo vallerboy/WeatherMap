@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="UMLDiagramComponent">
+    <diagram name="weathermap">
+      <command command-class="de.frag.umlplugin.uml.command.AddClassCommand" psi-class="pl.oskarpolak.weathermap.Starter" />
+      <command command-class="de.frag.umlplugin.uml.command.AddUsingClassesCommand" psi-class="pl.oskarpolak.weathermap.Starter" />
+      <command command-class="de.frag.umlplugin.uml.command.AddClassCommand" psi-class="pl.oskarpolak.weathermap.controllers.MainController" />
+      <command command-class="de.frag.umlplugin.uml.command.AddClassCommand" psi-class="pl.oskarpolak.weathermap.views.MainView" />
+      <command command-class="de.frag.umlplugin.uml.command.ConnectClassesFieldCommand" />
+      <command command-class="de.frag.umlplugin.uml.command.ConnectClassesExtendedCommand" />
+      <command command-class="de.frag.umlplugin.uml.command.ConnectSingleClassCommand" psi-class="pl.oskarpolak.weathermap.Starter" />
+      <compartment-visibility />
+    </diagram>
+  </component>
+</project>
