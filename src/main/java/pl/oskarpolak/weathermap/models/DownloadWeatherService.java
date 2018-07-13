@@ -16,7 +16,8 @@ public class DownloadWeatherService {
     }
 
     public String getWeather(String cityName){
-        return null; //todo uzyc readWebsite i odczytac JSON, zwracjac pogode
+        String url = Config.URL_TO_API + cityName + "&appid=" + Config.API_KEY;
+        return readWebsite(url);
     }
 
     private String readWebsite(String url){
