@@ -1,6 +1,7 @@
 package pl.oskarpolak.weathermap.controllers;
 
 import pl.oskarpolak.weathermap.models.DownloadWeatherService;
+import pl.oskarpolak.weathermap.models.WeatherParameters;
 import pl.oskarpolak.weathermap.views.MainView;
 import java.util.Scanner;
 
@@ -20,12 +21,20 @@ public class MainController {
     }
 
     private void createMainLoop() {
-        String userAnswer;
+        String userAnswerCity;
+        String userAnswerCountry;
         do{
             mainView.showCityRequestText();
-            userAnswer = scanner.nextLine();
+            userAnswerCity = scanner.nextLine();
 
-            mainView.showWeather(downloadWeatherService.getWeather(userAnswer));
-        }while (!userAnswer.equals("exit"));
+            mainView.showCountryRequestText();
+            userAnswerCountry = scanner.nextLine();
+
+            String text = "";
+            for (WeatherParameters weatherParameters : downloadWeatherService.getWeather(userAnswerCity, userAnswerCountry)) {
+                text += weatherParameters.getTemp() + " / " + weatherParameters.getLocalDateTime() + "\n";
+            }
+            mainView.showWeather(text);
+        }while (!userAnswerCity.equals("exit"));
     }
 }

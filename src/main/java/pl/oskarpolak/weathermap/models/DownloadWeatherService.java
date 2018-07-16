@@ -1,10 +1,16 @@
 package pl.oskarpolak.weathermap.models;
 
-import javax.print.Doc;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DownloadWeatherService {
     private static DownloadWeatherService INSTANCE = new DownloadWeatherService();
@@ -15,9 +21,41 @@ public class DownloadWeatherService {
         return INSTANCE;
     }
 
-    public String getWeather(String cityName){
-        String url = Config.URL_TO_API + cityName + "&appid=" + Config.API_KEY;
-        return readWebsite(url);
+    public List<WeatherParameters> getWeather(String cityName, String countryName){
+        String url = Config.URL_TO_API + cityName + "," + countryName + "&appid=" + Config.API_KEY;
+        String cleanJson = readWebsite(url);
+
+
+        JSONObject root = new JSONObject(cleanJson);
+        JSONArray someList = root.getJSONArray("list");
+
+        List<WeatherParameters> weatherParametersList = new ArrayList<>();
+
+        int localDay = 0;
+        double tempSum = 0;
+        int coutner = 0;
+
+        for (int i = 0; i < someList.length(); i++) {
+            JSONObject objectInArray = someList.getJSONObject(i);
+            JSONObject main = objectInArray.getJSONObject("main");
+
+            LocalDateTime localDateTime =
+                    LocalDateTime.ofEpochSecond(objectInArray.getInt("dt"), 0, ZoneOffset.UTC);
+            double temp = main.getDouble("temp");
+
+            if(localDay != localDateTime.getDayOfYear()){
+                weatherParametersList.add(new WeatherParameters(tempSum / coutner, localDateTime.minusDays(1)));
+                localDay = localDateTime.getDayOfYear();
+
+                tempSum =  temp;
+                coutner = 1;
+            }else{
+                coutner ++;
+                tempSum += temp;
+            }
+
+        }
+        return weatherParametersList;
     }
 
     private String readWebsite(String url){
